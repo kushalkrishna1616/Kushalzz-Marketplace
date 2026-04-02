@@ -3,18 +3,19 @@ import User from '../models/User.js';
 import Product from '../models/Product.js';
 
 // @desc    Get dashboard metrics
-// @route   GET /api/admin/metrics
-// @access  Private/Admin
 export const getAdminMetrics = async (req, res) => {
   try {
     const totalOrders = await Order.countDocuments();
     const totalUsers = await User.countDocuments();
     const totalProducts = await Product.countDocuments();
     
-    const orders = await Order.find({ isPaid: true });
-    const totalRevenue = orders.reduce((acc, item) => acc + item.totalPrice, 0);
+    // Sum total price of all paid orders
+    const paidOrders = await Order.find({ isPaid: true });
+    const totalRevenue = paidOrders.reduce((acc, order) => {
+       const amount = Number(order.totalPrice) || 0;
+       return acc + amount;
+    }, 0);
 
-    // Simple sales trends (last 7 days - placeholder logic)
     const salesTrends = [
       { name: "Mon", sales: 4000 },
       { name: "Tue", sales: 3000 },
@@ -22,7 +23,7 @@ export const getAdminMetrics = async (req, res) => {
       { name: "Thu", sales: 2780 },
       { name: "Fri", sales: 1890 },
       { name: "Sat", sales: 2390 },
-      { name: "Sun", sales: totalRevenue }, // Real Sunday sale!
+      { name: "Sun", sales: totalRevenue }, 
     ];
 
     res.json({
@@ -33,35 +34,33 @@ export const getAdminMetrics = async (req, res) => {
       salesTrends
     });
   } catch (error) {
-    res.status(500).json({ msg: error.message });
+    console.error("METRICS ERROR:", error.message);
+    res.status(500).json({ msg: "Failed to calculate boutique metrics" });
   }
 };
 
 // @desc    Get all orders
-// @route   GET /api/admin/orders
-// @access  Private/Admin
 export const getAllOrders = async (req, res) => {
   try {
+    // Populate user if exists, but don't fail if guest
     const orders = await Order.find({}).populate('user', 'name email').sort({ createdAt: -1 });
     
-    // Map to frontend expectation
     const mappedOrders = orders.map(order => ({
         _id: order._id,
-        user: order.user,
+        user: order.user ? { name: order.user.name, email: order.user.email } : { name: "Boutique Guest", email: "N/A" },
         createdAt: order.createdAt,
         status: order.isPaid && !order.isDelivered ? 'PAID' : order.isDelivered ? 'DELIVERED' : 'PLACED',
-        total: order.totalPrice
+        total: Number(order.totalPrice) || 0
     }));
 
     res.json(mappedOrders);
   } catch (error) {
-    res.status(500).json({ msg: error.message });
+    console.error("ADMIN ORDERS FETCH ERROR:", error.message);
+    res.status(500).json({ msg: "Failed to retrieve global orders" });
   }
 };
 
 // @desc    Update order status
-// @route   PUT /api/admin/orders/:id/status
-// @access  Private/Admin
 export const updateOrderStatus = async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
@@ -72,13 +71,13 @@ export const updateOrderStatus = async (req, res) => {
           order.isDelivered = true;
           order.deliveredAt = Date.now();
       }
-      // You can add more status logic here
       await order.save();
       res.json({ msg: 'Order status updated' });
     } else {
       res.status(404).json({ msg: 'Order not found' });
     }
   } catch (error) {
+    console.error("STATUS UPDATE ERROR:", error.message);
     res.status(500).json({ msg: error.message });
   }
 };
