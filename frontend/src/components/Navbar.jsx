@@ -24,7 +24,6 @@ const Navbar = () => {
     { name: "Footwear", path: "/category/footwear" },
     { name: "Accessories", path: "/category/accessories" },
     { name: "Winter Wear", path: "/category/winter-wear" },
-    { name: "Summer Collect", path: "/category/summer-collect" },
     { name: "Formal Attire", path: "/category/formal-attire" },
     { name: "Street Style", path: "/category/streetwear" },
     { name: "Designer", path: "/category/designer" },

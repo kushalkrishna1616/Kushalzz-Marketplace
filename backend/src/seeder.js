@@ -130,21 +130,12 @@ const products = [
 
   // ================= H&M =================
   {
-    name: "H&M Cotton T-Shirt",
-    brand: "H&M",
-    price: 799,
-    description: "Soft cotton everyday wear",
-    image: "/images/hm1.jpg",
-    category: "summer-collect",
-    stock: 80,
-  },
-  {
     name: "H&M Casual Shirt",
     brand: "H&M",
     price: 1499,
     description: "Slim fit casual shirt",
     image: "/images/hm2.jpg",
-    category: "summer-collect",
+    category: "menswear",
     stock: 60,
   },
   {
@@ -160,9 +151,9 @@ const products = [
     name: "H&M Denim Jacket",
     brand: "H&M",
     price: 2999,
-    description: "Classic denim jacket",
+    description: "Classic denim jacket for women",
     image: "/images/hm4.jpg",
-    category: "menswear",
+    category: "womenswear",
     stock: 30,
   },
   {

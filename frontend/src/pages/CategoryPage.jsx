@@ -50,11 +50,6 @@ export default function CategoryPage() {
       description: "Masterful layering and premium insulation for the colder seasons.",
       banner: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1600&q=80",
     },
-    "summer-collect": {
-      title: "Summer Resilience",
-      description: "Lightweight fabrics and vibrant aesthetics for the pursuit of sun.",
-      banner: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1600&q=80",
-    },
     "formal-attire": {
       title: "The Black Tie Selection",
       description: "Exquisite tailoring and formal silhouettes for your most significant moments.",
