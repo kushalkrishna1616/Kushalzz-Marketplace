@@ -48,7 +48,7 @@ export default function CategoryPage() {
     "winter-wear": {
       title: "The Winter Edit",
       description: "Masterful layering and premium insulation for the colder seasons.",
-      banner: "https://images.unsplash.com/photo-1544022613-ea6224424694?w=1600&q=80",
+      banner: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1600&q=80",
     },
     "summer-collect": {
       title: "Summer Resilience",
@@ -58,7 +58,7 @@ export default function CategoryPage() {
     "formal-attire": {
       title: "The Black Tie Selection",
       description: "Exquisite tailoring and formal silhouettes for your most significant moments.",
-      banner: "https://images.unsplash.com/photo-1594932224440-752733bc4c1e?w=1600&q=80",
+      banner: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1600&q=80",
     },
     designer: {
       title: "Global Clothing Brands",
