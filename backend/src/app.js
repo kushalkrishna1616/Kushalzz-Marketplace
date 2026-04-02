@@ -9,6 +9,7 @@ import paymentRoutes from './routes/PaymentRoutes.js';
 import addressRoutes from './routes/AddressRoutes.js';
 import wishlistRoutes from './routes/WishlistRoutes.js';
 import orderRoutes from './routes/OrderRoutes.js';
+import adminRoutes from './routes/AdminRoutes.js';
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.use('/api/payment', paymentRoutes);
 app.use('/api/address', addressRoutes);
 app.use('/api/wishlist', wishlistRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Basic Route
 app.get('/', (req, res) => {
