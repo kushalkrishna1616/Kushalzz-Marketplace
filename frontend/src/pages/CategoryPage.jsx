@@ -53,7 +53,7 @@ export default function CategoryPage() {
     "summer-collect": {
       title: "Summer Resilience",
       description: "Lightweight fabrics and vibrant aesthetics for the pursuit of sun.",
-      banner: "https://images.unsplash.com/photo-1523381235212-d73f49380fbb?w=1600&q=80",
+      banner: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1600&q=80",
     },
     "formal-attire": {
       title: "The Black Tie Selection",
