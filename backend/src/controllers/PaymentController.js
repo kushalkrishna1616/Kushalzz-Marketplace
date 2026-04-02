@@ -36,36 +36,56 @@ export const createOrder = async (req, res) => {
 // @access  Public (or Private)
 export const verifyPayment = async (req, res) => {
   try {
-    // getting the details back from our font-end
     const {
-        orderCreationId,
-        razorpayPaymentId,
-        razorpayOrderId,
-        razorpaySignature,
+        razorpay_order_id,
+        razorpay_payment_id,
+        razorpay_signature,
+        shippingAddress,
+        items,
+        totalAmount
     } = req.body;
 
-    // Creating our own digest
-    // The format should be like this:
-    // digest = hmac_sha256(orderCreationId + "|" + razorpayPaymentId, secret);
-    const shasum = crypto.createHmac("sha256", process.env.RAZORPAY_KEY_SECRET || 'YourTestKeySecret');
-
-    shasum.update(`${orderCreationId}|${razorpayPaymentId}`);
-
+    // Signature verification logic
+    const shasum = crypto.createHmac("sha256", process.env.RAZORPAY_KEY_SECRET || 'TxPwAe8AbL6FEB0e3lm2WMYX');
+    shasum.update(`${razorpay_order_id}|${razorpay_payment_id}`);
     const digest = shasum.digest("hex");
 
-    // comaparing our digest with the actual signature
-    if (digest !== razorpaySignature)
-        return res.status(400).json({ msg: "Transaction not legit!" });
+    if (digest !== razorpay_signature)
+        return res.status(400).json({ msg: "Transaction signature mismatch!" });
 
-    // THE PAYMENT IS LEGIT & VERIFIED
-    // YOU CAN SAVE THE DETAILS IN YOUR DATABASE IF YOU WANT
+    // 🏆 THE PAYMENT IS LEGIT -> SAVE THE ORDER!
+    const orderItems = items.map(item => ({
+       name: item.name,
+       qty: item.quantity,
+       image: item.image,
+       price: item.price,
+       product: item._id
+    }));
+
+    const order = new Order({
+       user: req.user?._id || "64b0f1a23b8f2c001a0e3d2f", // Fallback or Guest mode
+       orderItems,
+       shippingAddress,
+       totalPrice: totalAmount,
+       isPaid: true,
+       paidAt: Date.now(),
+       paymentResult: {
+          id: razorpay_payment_id,
+          status: "success",
+          update_time: Date.now().toString(),
+       }
+    });
+
+    const savedOrder = await order.save();
 
     res.json({
         msg: "success",
-        orderId: razorpayOrderId,
-        paymentId: razorpayPaymentId,
+        orderId: razorpay_order_id,
+        paymentId: razorpay_payment_id,
+        savedOrder
     });
 } catch (error) {
-    res.status(500).send(error);
+    console.error("Payment Verification Error:", error.message);
+    res.status(500).send(error.message);
 }
 };
