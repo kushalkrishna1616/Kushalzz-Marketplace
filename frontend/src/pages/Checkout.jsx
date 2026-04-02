@@ -57,7 +57,7 @@ export default function Checkout() {
 
     try {
       // 1. Create order on backend
-      const { data: orderData } = await API.post("/payments/order", {
+      const { data: orderData } = await API.post("/payment/order", {
         amount: total,
       });
 
@@ -72,7 +72,7 @@ export default function Checkout() {
         handler: async (response) => {
           try {
             // 3. Verify Payment on Backend
-            await API.post("/payments/verify", {
+            await API.post("/payment/verify", {
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_signature: response.razorpay_signature,
