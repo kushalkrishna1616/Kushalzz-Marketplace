@@ -47,8 +47,8 @@ export default function Checkout() {
   );
 
   const [paymentMethod, setPaymentMethod] = useState("card");
-  const [isPaying, setIsPaying] = useState(false);
-  const [showMockModal, setShowMockModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [promo, setPromo] = useState("");
 
   // ----------------------------------
   // RAZORPAY SCRIPT LOADER
@@ -280,81 +280,6 @@ export default function Checkout() {
         </div>
       </div>
       
-      {/* ELITE MOCK GATEWAY (NO KYC REQUIRED) */}
-      {showMockModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9, y: 30 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            className="bg-white max-w-md w-full rounded-[2.5rem] p-10 shadow-[0_40px_100px_rgba(0,0,0,0.4)] relative overflow-hidden"
-          >
-            <div className="absolute top-0 right-0 p-6 opacity-[0.03]">
-              <h1 className="text-9xl font-black rotate-12">KUSHALZZ</h1>
-            </div>
-            
-            <div className="flex justify-between items-center mb-10">
-              <div className="space-y-1">
-                <h3 className="text-2xl font-light text-slate-800" style={{ fontFamily: "'Playfair Display', serif" }}>
-                   Payment Gateway
-                </h3>
-                <p className="text-[9px] font-bold text-gray-400 uppercase tracking-[0.3em]">Secure Boutique Checkout</p>
-              </div>
-              <div className="h-14 w-14 bg-slate-900 rounded-2xl flex items-center justify-center text-white text-2xl shadow-xl">
-                 🏦
-              </div>
-            </div>
-            
-            <div className="mb-10 p-6 bg-gray-50 rounded-3xl border border-gray-100/50 flex justify-between items-center relative overflow-hidden">
-               <div className="absolute top-0 left-0 w-1 h-full bg-[#C9A84C]" />
-               <div>
-                 <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-2">Final Settlement</p>
-                 <p className="text-3xl font-light text-slate-900" style={{ fontFamily: "'Playfair Display', serif" }}>₹{total}</p>
-               </div>
-               <div className="text-right">
-                  <div className="flex items-center gap-2 justify-end mb-1">
-                     <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                     <span className="text-[10px] font-bold text-slate-900 uppercase tracking-widest">Encrypted</span>
-                  </div>
-                  <p className="text-[8px] font-medium text-gray-400 uppercase tracking-widest italic">Order #KZ-{Math.floor(Math.random()*9000)+1000}</p>
-               </div>
-            </div>
-
-            <div className="space-y-6">
-               <div className="space-y-2">
-                 <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Card Details</p>
-                 <div className="p-5 border-2 border-gray-100 rounded-2xl bg-white flex items-center gap-4 group focus-within:border-[#C9A84C]/50 transition-all">
-                    <span className="text-xl opacity-40">💳</span>
-                    <p className="text-sm tracking-[0.2em] font-medium text-slate-600">4444 •••• •••• 1234</p>
-                 </div>
-               </div>
-
-               <div className="flex flex-col gap-4 pt-4">
-                 <button
-                   onClick={handleMockSuccess}
-                   disabled={isPaying}
-                   className="w-full py-5 text-white bg-[#C9A84C] rounded-[1.5rem] cursor-pointer hover:bg-black font-bold uppercase tracking-[0.2em] text-[11px] transition-all duration-500 shadow-2xl shadow-[#C9A84C]/20 relative overflow-hidden group"
-                 >
-                   <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-                   {isPaying ? "Authenticating..." : "Authorize Selection"}
-                 </button>
-                 
-                 <button
-                   onClick={() => setShowMockModal(false)}
-                   disabled={isPaying}
-                   className="w-full py-4 text-gray-400 text-[10px] uppercase tracking-widest font-bold hover:text-red-400 transition-colors"
-                 >
-                   Depart Checkout
-                 </button>
-               </div>
-            </div>
-
-            <p className="mt-8 text-center text-[8px] text-gray-300 font-bold uppercase tracking-[0.3em]">
-               Kushalzz Marketplace Global Security Shield Active
-            </p>
-          </motion.div>
-        </div>
-      )}
-
       <style jsx>{`
         .custom-scrollbar::-webkit-scrollbar {
           width: 4px;
