@@ -71,14 +71,14 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
           
           <div className="absolute left-6 md:left-16 bottom-12 md:bottom-16 max-w-2xl text-white">
-             <div className="animate-in fade-in slide-in-from-left-4 duration-700">
-               <p className="text-[9px] md:text-[10px] font-bold text-[#FBCFE8] uppercase tracking-[0.4em] mb-3 md:mb-4">
+             <div style={{ animation: "fadeInUp 0.8s ease-out forwards" }}>
+               <p className="text-[9px] md:text-[10px] font-bold text-[#FBCFE8] uppercase tracking-[0.4em] mb-3 md:mb-4 opacity-0" style={{ animationDelay: "0.2s", animationFillMode: "forwards" }}>
                   The Future of Fashion
                </p>
-               <h1 className="text-3xl md:text-7xl font-light leading-tight mb-8" style={{ fontFamily: "'Playfair Display', serif" }}>
+               <h1 className="text-3xl md:text-7xl font-light leading-tight mb-8 opacity-0" style={{ fontFamily: "'Playfair Display', serif", animationDelay: "0.4s", animationFillMode: "forwards" }}>
                   Kushalzz <span className="italic block text-[#C9A84C]">Marketplace™</span>
                </h1>
-               <div className="mt-2">
+               <div className="mt-2 opacity-0" style={{ animationDelay: "0.6s", animationFillMode: "forwards" }}>
                   <Link to="/search" className="inline-block px-10 py-4 bg-white text-black text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] rounded-full hover:bg-[#C9A84C] hover:text-white transition-all duration-500 shadow-xl">
                       Explore All Collections
                   </Link>
@@ -87,6 +87,13 @@ export default function Home() {
           </div>
         </div>
       </div>
+      
+      <style>{`
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
       <div className="mt-10 md:mt-20 px-6 py-12 md:py-24 mx-auto max-w-7xl bg-gray-50/50 rounded-[2rem] md:rounded-[4rem] border border-gray-50 mb-20">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 px-4">
           <div className="space-y-4">
