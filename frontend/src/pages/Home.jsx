@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { API } from "../pages/api";
 
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -17,7 +18,7 @@ export default function Home() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/products");
+        const { data } = await API.get("/products");
         setProducts(data);
         setLoading(false);
       } catch (error) {
