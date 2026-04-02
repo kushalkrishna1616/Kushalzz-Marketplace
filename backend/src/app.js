@@ -8,6 +8,7 @@ import authRoutes from './routes/AuthRoutes.js';
 import paymentRoutes from './routes/PaymentRoutes.js';
 import addressRoutes from './routes/AddressRoutes.js';
 import wishlistRoutes from './routes/WishlistRoutes.js';
+import orderRoutes from './routes/OrderRoutes.js';
 
 dotenv.config();
 
@@ -27,16 +28,11 @@ app.use('/api/auth', authRoutes);
 app.use('/api/payment', paymentRoutes);
 app.use('/api/address', addressRoutes);
 app.use('/api/wishlist', wishlistRoutes);
+app.use('/api/orders', orderRoutes);
 
 // Basic Route
 app.get('/', (req, res) => {
   res.send('👟 Kushalzz Marketplace API is running...');
-});
-
-// (Real address routes handled by /api/address router above)
-
-app.post('/api/orders', (req, res) => {
-  res.json({ success: true, orderId: "KZ_ORD_" + Math.floor(Math.random() * 10000) });
 });
 
 const PORT = process.env.PORT || 5000;
