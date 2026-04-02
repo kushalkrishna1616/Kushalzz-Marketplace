@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import { FaComments, FaTimes, FaPaperPlane, FaHeadset } from "react-icons/fa";
 import { API } from "../pages/api.jsx";
 
-const socket = io("http://localhost:5000");
+const socket = io(import.meta.env.VITE_API_BASE_URL?.replace("/api", "") || "http://localhost:5000");
 
 const SupportChat = () => {
   const [isOpen, setIsOpen] = useState(false);
