@@ -58,51 +58,34 @@ export default function Home() {
           </motion.div>
         )}
 
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2 }}
-          className="overflow-hidden rounded-[2rem] md:rounded-[3rem] shadow-2xl shadow-black/5 relative h-[400px] md:h-[580px] w-full group"
-        >
+        <div className="overflow-hidden rounded-[2rem] md:rounded-[3rem] shadow-2xl shadow-black/5 relative h-[420px] md:h-[580px] w-full" style={{ willChange: "transform" }}>
           <video
             src="/videos/intro.mp4"
             autoPlay
             loop
             muted
             playsInline
-            className="absolute inset-0 object-cover w-full h-full transform transition-transform duration-[10s]"
+            className="absolute inset-0 object-cover w-full h-full"
+            style={{ willChange: "transform" }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
           
-          <div className="absolute left-6 md:left-16 bottom-10 md:bottom-16 max-w-2xl text-white">
-             <motion.p 
-               initial={{ opacity: 0, x: -10 }}
-               animate={{ opacity: 1, x: 0 }}
-               transition={{ delay: 0.5 }}
-               className="text-[9px] md:text-[10px] font-bold text-[#FBCFE8] uppercase tracking-[0.4em] mb-3 md:mb-4"
-             >
-                The Future of Fashion
-             </motion.p>
-             <motion.h1 
-               initial={{ opacity: 0, y: 15 }}
-               animate={{ opacity: 1, y: 0 }}
-               transition={{ delay: 0.7 }}
-               className="text-3xl md:text-7xl font-light leading-tight mb-6 md:mb-8" 
-               style={{ fontFamily: "'Playfair Display', serif" }}
-             >
-                Kushalzz <span className="italic block text-[#C9A84C]">Marketplace™</span>
-             </motion.h1>
-             <motion.div
-               initial={{ opacity: 0 }}
-               animate={{ opacity: 1 }}
-               transition={{ delay: 1 }}
-             >
-                <Link to="/search" className="inline-block px-8 md:px-10 py-4 bg-white text-black text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] md:tracking-[0.3em] rounded-full hover:bg-[#C9A84C] hover:text-white transition-all duration-500 shadow-xl">
-                    Explore All Collections
-                </Link>
-             </motion.div>
+          <div className="absolute left-6 md:left-16 bottom-12 md:bottom-16 max-w-2xl text-white">
+             <div className="animate-in fade-in slide-in-from-left-4 duration-700">
+               <p className="text-[9px] md:text-[10px] font-bold text-[#FBCFE8] uppercase tracking-[0.4em] mb-3 md:mb-4">
+                  The Future of Fashion
+               </p>
+               <h1 className="text-3xl md:text-7xl font-light leading-tight mb-8" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  Kushalzz <span className="italic block text-[#C9A84C]">Marketplace™</span>
+               </h1>
+               <div className="mt-2">
+                  <Link to="/search" className="inline-block px-10 py-4 bg-white text-black text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] rounded-full hover:bg-[#C9A84C] hover:text-white transition-all duration-500 shadow-xl">
+                      Explore All Collections
+                  </Link>
+               </div>
+             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
       <div className="mt-10 md:mt-20 px-6 py-12 md:py-24 mx-auto max-w-7xl bg-gray-50/50 rounded-[2rem] md:rounded-[4rem] border border-gray-50 mb-20">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 px-4">
