@@ -1,0 +1,332 @@
+
+import React, { useState } from "react";
+import { FiUser } from "react-icons/fi";
+import { GoogleLogin } from "@react-oauth/google";
+import { API } from "./api";
+import toast from "react-hot-toast";
+import SupportChat from "../components/SupportChat";
+
+export default function Login() {
+  const [mode, setMode] = useState("login");
+  const [step, setStep] = useState(1);
+  const [otp, setOtp] = useState("");
+  const [animating, setAnimating] = useState(false);
+  const [form, setForm] = useState({
+    name: "",
+    contact: "",
+    password: "",
+    newPassword: "",
+    role: "customer"
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const loginToast = (message) => {
+    toast(message); // Uses the global premium toast config we set in App.jsx
+  };
+
+  /* ================= MODE SWITCH ================= */
+  const switchMode = (nextMode) => {
+    setAnimating(true);
+    setTimeout(() => {
+      setMode(nextMode);
+      setStep(1);
+      setAnimating(false);
+    }, 300);
+  };
+
+  /* ================= EMAIL LOGIN ================= */
+  const handleLogin = async () => {
+    if (!form.contact || !form.password) {
+      loginToast("Credentials required");
+      return;
+    }
+
+    try {
+      const res = await API.post("/auth/login", {
+        email: form.contact,
+        password: form.password,
+      });
+
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("username", res.data.user.name);
+      localStorage.setItem("userId", res.data.user._id);
+      localStorage.setItem("role", res.data.user.role);
+
+      loginToast("Welcome to Kushalzz Marketplace");
+      window.location.href = "/";
+    } catch (err) {
+      const msg = err.response?.data?.msg || "Access Denied: Invalid Credentials";
+      loginToast(msg);
+    }
+  };
+
+  /* ================= GOOGLE LOGIN ================= */
+  const [showGoogleBtn, setShowGoogleBtn] = useState(false);
+
+  const handleGoogleLogin = async (credential, intent = "login") => {
+    try {
+      const res = await API.post("/auth/google", {
+        token: credential,
+        role: form.role,
+        intent: intent
+      });
+
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("username", res.data.user.name);
+      localStorage.setItem("userId", res.data.user._id);
+      localStorage.setItem("role", res.data.user.role);
+
+      loginToast("Aesthetic Entry: Google Verified");
+      window.location.href = "/";
+    } catch (err) {
+      const msg = err.response?.data?.msg || "Google Authentication Failed";
+      loginToast(msg);
+    }
+  };
+
+  /* ================= SIGNUP ================= */
+  const nextToRole = () => {
+    if (!form.name || !form.contact || !form.password) {
+      loginToast("All details are essential");
+      return;
+    }
+    setStep(2); // Role selection
+  };
+
+  const handleSignup = async () => {
+    try {
+      const res = await API.post("/auth/signup", {
+        name: form.name,
+        contact: form.contact,
+        password: form.password,
+        role: form.role,
+      });
+
+      loginToast("Account Curated Successfully");
+      switchMode("login");
+    } catch (err) {
+      const msg = err.response?.data?.msg || "Signup Failed";
+      loginToast(msg);
+    }
+  };
+
+  // Removed verifySignupOtp as it is no longer needed for direct signup flow
+
+
+  const RoleSelector = () => (
+    <div className="grid grid-cols-2 gap-4 mt-6 mb-8">
+      {["customer", "admin"].map((r) => (
+        <div
+          key={r}
+          onClick={() => setForm({ ...form, role: r })}
+          className={`px-4 py-3.5 rounded-2xl border transition-all duration-500 text-center capitalize text-[10px] font-bold tracking-[0.2em] cursor-pointer ${
+            form.role === r
+              ? "bg-slate-900 border-slate-900 text-[#C9A84C] shadow-2xl shadow-slate-200"
+              : "bg-white border-gray-100 text-gray-400 hover:border-[#FBCFE8]"
+          }`}
+        >
+          {r}
+        </div>
+      ))}
+    </div>
+  );
+
+  /* ================= FORGOT PASSWORD ================= */
+  const sendResetOtp = async () => {
+    if (!form.contact) {
+      loginToast("Email is required");
+      return;
+    }
+
+    try {
+      await API.post("/auth/forgot-password/send-otp", {
+        email: form.contact,
+      });
+      loginToast("Code sent");
+      setStep(2);
+    } catch (err) {
+      const msg = err.response?.data?.msg || "Request failed";
+      loginToast(msg);
+    }
+  };
+
+  const resetPassword = async () => {
+    if (!otp || !form.newPassword) {
+      loginToast("All fields are required");
+      return;
+    }
+
+    try {
+      await API.post("/auth/forgot-password/verify-otp", {
+        email: form.contact,
+        otp,
+        newPassword: form.newPassword,
+      });
+
+      loginToast("Credentials updated");
+      switchMode("login");
+    } catch (err) {
+      const msg = err.response?.data?.msg || "Update failed";
+      loginToast(msg);
+    }
+  };
+
+  const rightTitle =
+    mode === "signup"
+      ? "Join Kushalzz Marketplace"
+      : mode === "forgot"
+      ? "Restore Access"
+      : "Welcome Back";
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA] p-6">
+      <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none overflow-hidden">
+         <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#FBCFE8] rounded-full blur-[120px]" />
+         <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#C9A84C] rounded-full blur-[120px]" />
+      </div>
+
+      <div className="relative w-full max-w-5xl bg-white rounded-[3rem] shadow-[0_40px_100px_rgba(0,0,0,0.06)] overflow-hidden border border-white flex flex-col md:flex-row">
+        
+        {/* LEFT PANEL: AUTH FORM */}
+        <div className={`flex-1 p-8 md:p-12 lg:p-16 transition-all duration-700 ${animating ? "opacity-0 translate-y-10" : "opacity-100 translate-y-0"}`}>
+          <div className="mb-8 md:mb-12">
+            <h1 className="text-3xl md:text-5xl font-light text-slate-900 mb-2 md:mb-4 capitalize" style={{ fontFamily: "'Playfair Display', serif" }}>{mode}</h1>
+            <p className="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em]">Accessing the Boutique Collection</p>
+          </div>
+
+          <div className="space-y-6">
+            {mode === "login" && (
+              <>
+                <div className="space-y-1.5">
+                  <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest ml-4">Email Destination</label>
+                  <input name="contact" placeholder="Email Address" onChange={handleChange} className="boutique-input" />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest ml-4">Secure Key</label>
+                  <input name="password" type="password" placeholder="Password" onChange={handleChange} className="boutique-input" />
+                </div>
+
+                <button onClick={handleLogin} className="boutique-btn">Begin Journey</button>
+
+                {/* LOGIN VIA GOOGLE */}
+                <div className="mt-8 pt-8 border-t border-gray-50 flex flex-col items-center">
+                  <div className="flex justify-center flex-col items-center gap-4">
+                    <p className="text-[8px] text-zinc-400 uppercase tracking-widest">Identify via authentication</p>
+                    <GoogleLogin
+                      onSuccess={(res) => handleGoogleLogin(res.credential, "login")}
+                      onError={() => loginToast("Authentication Failed")}
+                      theme="outline"
+                      shape="pill"
+                    />
+                  </div>
+                </div>
+
+                <p className="mt-8 text-[10px] font-bold text-[#C9A84C] uppercase tracking-widest text-center cursor-pointer hover:text-slate-900 transition-colors" onClick={() => switchMode("forgot")}>
+                  Forgot Credentials?
+                </p>
+              </>
+            )}
+
+            {mode === "signup" && step === 1 && (
+              <>
+                <input name="name" placeholder="Full Name" onChange={handleChange} className="boutique-input" />
+                <input name="contact" placeholder="Email Address" onChange={handleChange} className="boutique-input" />
+                <input name="password" type="password" placeholder="Secure Password" onChange={handleChange} className="boutique-input" />
+                
+                <button onClick={nextToRole} className="boutique-btn">Proceed to Role Selection</button>
+
+                {/* SIGNUP VIA GOOGLE */}
+                <div className="mt-8 pt-8 border-t border-gray-50 flex flex-col items-center">
+                   <div className="flex justify-center flex-col items-center gap-4">
+                    <p className="text-[8px] text-zinc-400 uppercase tracking-widest text-center">Establish your identity with Google</p>
+                    <GoogleLogin
+                      onSuccess={(res) => handleGoogleLogin(res.credential, "signup")}
+                      onError={() => loginToast("Authentication Failed")}
+                      theme="outline"
+                      shape="pill"
+                      text="signup_with"
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+
+            {mode === "signup" && step === 2 && (
+              <>
+                <h2 className="text-xl font-light text-slate-800 mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>Define your Identity</h2>
+                <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-6">Joining the Kushalzz Marketplace Ecosystem</p>
+                <RoleSelector />
+                <button onClick={handleSignup} className="boutique-btn">Complete Registration as {form.role}</button>
+                <button onClick={() => setStep(1)} className="w-full mt-6 text-[10px] font-bold text-gray-300 uppercase tracking-widest">Return to Details</button>
+              </>
+            )}
+
+            {/* Step 3 (OTP) removed for direct signup flow */}
+
+
+            {mode === "forgot" && step === 1 && (
+              <>
+                <input name="contact" placeholder="Registered Email" onChange={handleChange} className="boutique-input" />
+                <button onClick={sendResetOtp} className="boutique-btn">Request Recovery</button>
+              </>
+            )}
+
+            {mode === "forgot" && step === 2 && (
+              <>
+                <input placeholder="Recovery Code" onChange={(e) => setOtp(e.target.value)} className="boutique-input" />
+                <input name="newPassword" type="password" placeholder="New Secret Key" onChange={handleChange} className="boutique-input" />
+                <button onClick={resetPassword} className="boutique-btn">Restore Sovereignty</button>
+              </>
+            )}
+
+            <div className="pt-10 text-center">
+              <p className="text-[10px] font-bold text-[#FBCFE8] uppercase tracking-[0.3em] cursor-pointer hover:text-slate-900 transition-colors"
+                onClick={() => {
+                  setShowGoogleBtn(false);
+                  switchMode(mode === "login" ? "signup" : "login");
+                }}>
+                {mode === "login"
+                  ? "New to Kushalzz? Create a Profile"
+                  : "Known Member? Authenticate Here"}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT PANEL: AESTHETIC SPLASH */}
+        <div className="w-full md:w-[400px] bg-slate-900 relative flex items-center justify-center p-12 overflow-hidden">
+           {/* Decorative background flare */}
+           <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-[#FBCFE8]/10 to-transparent opacity-50" />
+           
+           <div className={`text-center space-y-8 relative z-10 transition-all duration-700 ${animating ? "opacity-0 scale-95" : "opacity-100 scale-100"}`}>
+             <div className="flex justify-center">
+                <div className="w-24 h-24 rounded-[2.5rem] bg-white/5 border border-white/10 flex items-center justify-center text-[#C9A84C] shadow-2xl relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-[#FBCFE8]/5 to-transparent translate-y-full group-hover:translate-y-[-100%] transition-transform duration-1000" />
+                  <FiUser size={40} strokeWidth={1} />
+                </div>
+             </div>
+             
+              <div className="space-y-3 md:space-y-4">
+                 <h2 className="text-3xl md:text-5xl font-light text-white leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>{rightTitle}</h2>
+                 <div className="h-px w-10 md:w-12 bg-[#C9A84C] mx-auto" />
+                 <p className="text-[8px] md:text-[10px] text-gray-400 font-bold uppercase tracking-[0.4em] px-4 md:px-8 leading-relaxed">Defining the standard of boutique luxury.</p>
+              </div>
+           </div>
+
+           {/* Bottom subtle branding */}
+           <div className="absolute bottom-10 text-[8px] font-bold text-white/20 uppercase tracking-[0.8em]">Kushalzz Marketplace • Elite</div>
+        </div>
+      </div>
+
+      
+      {/* ADD CONSTUMER SUPPORT BACK */}
+      <div style={{ position: 'fixed', zIndex: 9999 }}>
+        <SupportChat />
+      </div>
+    </div>
+  );
+}

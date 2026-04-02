@@ -1,0 +1,8 @@
+
+ComputerName     : ac-25yfpqy-shard-00-00.2t3tfur.mongodb.net
+RemoteAddress    : 159.41.192.52
+RemotePort       : 27017
+InterfaceAlias   : Wi-Fi
+SourceAddress    : 10.48.121.37
+TcpTestSucceeded : True
+
