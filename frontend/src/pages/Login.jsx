@@ -19,6 +19,14 @@ export default function Login() {
     role: "customer"
   });
 
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -41,6 +49,11 @@ export default function Login() {
   const handleLogin = async () => {
     if (!form.contact || !form.password) {
       loginToast("Credentials required");
+      return;
+    }
+
+    if (!validateEmail(form.contact)) {
+      loginToast("Please enter a valid email (e.g. name@gmail.com)");
       return;
     }
 
@@ -93,6 +106,11 @@ export default function Login() {
       loginToast("All details are essential");
       return;
     }
+
+    if (!validateEmail(form.contact)) {
+      loginToast("Please enter a valid email structure");
+      return;
+    }
     setStep(2); // Role selection
   };
 
@@ -138,6 +156,11 @@ export default function Login() {
   const sendResetOtp = async () => {
     if (!form.contact) {
       loginToast("Email is required");
+      return;
+    }
+
+    if (!validateEmail(form.contact)) {
+      loginToast("Enter a valid boutique email address");
       return;
     }
 
@@ -202,7 +225,7 @@ export default function Login() {
               <>
                 <div className="space-y-1.5">
                   <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest ml-4">Email Destination</label>
-                  <input name="contact" placeholder="Email Address" onChange={handleChange} className="boutique-input" />
+                  <input name="contact" type="email" placeholder="Email Address" onChange={handleChange} className="boutique-input" />
                 </div>
 
                 <div className="space-y-1.5">
@@ -234,7 +257,7 @@ export default function Login() {
             {mode === "signup" && step === 1 && (
               <>
                 <input name="name" placeholder="Full Name" onChange={handleChange} className="boutique-input" />
-                <input name="contact" placeholder="Email Address" onChange={handleChange} className="boutique-input" />
+                <input name="contact" type="email" placeholder="Email Address" onChange={handleChange} className="boutique-input" />
                 <input name="password" type="password" placeholder="Secure Password" onChange={handleChange} className="boutique-input" />
                 
                 <button onClick={nextToRole} className="boutique-btn">Proceed to Role Selection</button>
@@ -270,7 +293,7 @@ export default function Login() {
 
             {mode === "forgot" && step === 1 && (
               <>
-                <input name="contact" placeholder="Registered Email" onChange={handleChange} className="boutique-input" />
+                <input name="contact" type="email" placeholder="Registered Email" onChange={handleChange} className="boutique-input" />
                 <button onClick={sendResetOtp} className="boutique-btn">Request Recovery</button>
               </>
             )}
