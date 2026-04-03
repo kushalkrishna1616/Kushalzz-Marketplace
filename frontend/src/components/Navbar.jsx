@@ -1,12 +1,23 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext, useRef } from "react";
-import { FaSearch, FaUser, FaShoppingCart, FaHeart, FaChevronRight } from "react-icons/fa";
+import { FaSearch, FaUser, FaShoppingCart, FaHeart, FaChevronRight, FaBars, FaTimes } from "react-icons/fa";
 import { API } from "../pages/api.jsx";
 import CartContext from "../context/CartContext.jsx";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const closeDropdowns = () => {
+      setIsProfileOpen(false);
+    };
+    window.addEventListener("click", closeDropdowns);
+    return () => window.removeEventListener("click", closeDropdowns);
+  }, []);
   const [searchResults, setSearchResults] = useState([]);
   const [showSearch, setShowSearch] = useState(false);
   const navigate = useNavigate();
@@ -168,8 +179,14 @@ const Navbar = () => {
               <FaSearch />
             </button>
             {username ? (
-              <div className="relative group">
-                <button className="flex items-center gap-3 text-slate-800 hover:text-[#C9A84C] transition-all group-hover:scale-[1.02]">
+              <div className="relative">
+                <button 
+                  className="flex items-center gap-3 text-slate-800 hover:text-[#C9A84C] transition-all group-hover:scale-[1.02]"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsProfileOpen(!isProfileOpen);
+                  }}
+                >
                   <div className="w-10 h-10 rounded-[14px] bg-slate-900 border border-slate-800 flex items-center justify-center overflow-hidden transition-all shadow-lg ring-1 ring-white/10">
                     <FaUser className="text-[#C9A84C] text-sm" />
                   </div>
@@ -178,7 +195,7 @@ const Navbar = () => {
                     <span className="text-xs font-medium tracking-tight" style={{ fontFamily: "'Jost', sans-serif" }}>{username}</span>
                   </div>
                 </button>
-                <div className="absolute right-0 w-64 mt-4 transition-all opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-3 group-hover:translate-y-0 z-[100] scale-95 group-hover:scale-100 origin-top-right">
+                <div className={`absolute right-0 w-64 mt-4 transition-all z-[100] scale-95 duration-300 origin-top-right ${isProfileOpen ? "opacity-100 visible translate-y-0 scale-100" : "opacity-0 invisible translate-y-3 pointer-events-none"}`}>
                   <div className="overflow-hidden bg-white border border-gray-200 rounded-3xl shadow-[0_30px_100px_-15px_rgba(0,0,0,0.15)] p-2 ring-1 ring-black/[0.03]">
                     {role === "admin" && (
                       <Link to="/admin" className="flex items-center gap-3 px-4 py-3 text-[11px] text-[#C9A84C] font-bold hover:bg-[#C9A84C]/5 rounded-2xl transition-all border-b border-gray-100/50 mb-1 uppercase tracking-widest">
@@ -301,7 +318,21 @@ const Navbar = () => {
                 </div>
 
                 <div className="pt-8 border-t border-gray-100 space-y-4">
-                   {!username && (
+                   {username ? (
+                     <div className="space-y-4">
+                       <p className="text-[8px] font-bold text-gray-400 uppercase tracking-[0.3em] px-3">Elite Member Services</p>
+                       <div className="grid grid-cols-2 gap-3">
+                         <Link to="/profile" className="p-4 rounded-2xl bg-gray-50 text-xs font-bold uppercase tracking-widest text-slate-600 border border-gray-100 text-center" onClick={() => setIsMenuOpen(false)}>Profile</Link>
+                         <Link to="/orders" className="p-4 rounded-2xl bg-gray-50 text-xs font-bold uppercase tracking-widest text-slate-600 border border-gray-100 text-center" onClick={() => setIsMenuOpen(false)}>Orders</Link>
+                       </div>
+                       <button 
+                        onClick={() => { handleLogout(); setIsMenuOpen(false); }} 
+                        className="w-full py-4 bg-red-50 text-red-500 rounded-2xl text-[10px] font-bold uppercase tracking-[0.2em] border border-red-100"
+                       >
+                         Secure Sign Out
+                       </button>
+                     </div>
+                   ) : (
                      <Link 
                       to="/login" 
                       className="block w-full text-center py-5 bg-slate-900 text-white rounded-3xl text-sm font-bold uppercase tracking-widest shadow-xl"
