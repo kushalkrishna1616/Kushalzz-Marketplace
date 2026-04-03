@@ -102,7 +102,7 @@ export default function WishlistPage() {
                   <div className="mb-6">
                     <div className="flex items-center gap-2 mb-2">
                        <p className="text-[9px] font-bold text-[#C9A84C] uppercase tracking-widest leading-none">{product.category}</p>
-                       <div className="h-px w-4 bg-[#FBCFE8]/30" />
+                       <div className="h-px w-4 bg-[#C9A84C]/30" />
                     </div>
                     <h3 className="text-sm font-bold text-slate-800 uppercase tracking-tight line-clamp-1 mb-2" style={{ fontFamily: "'Jost', sans-serif" }}>{product.name}</h3>
                     <p className="text-lg font-normal text-slate-900" style={{ fontFamily: "'Playfair Display', serif" }}>₹{product.price}</p>

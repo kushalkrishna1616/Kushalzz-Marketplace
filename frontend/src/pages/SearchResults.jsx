@@ -43,7 +43,7 @@ export default function SearchResults() {
       {/* Breadcrumbs */}
       <div className="bg-gray-50 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center gap-3 text-[11px] uppercase tracking-[0.2em] text-gray-400">
-          <Link to="/" className="hover:text-[#FBCFE8] transition-colors">Home</Link>
+          <Link to="/" className="hover:text-[#C9A84C] transition-colors">Home</Link>
           <FaChevronRight size={8} className="opacity-50" />
           <span className="text-gray-900">Boutique Search</span>
         </div>
@@ -53,7 +53,7 @@ export default function SearchResults() {
         {/* HEADER */}
         <div className="mb-12 md:mb-20 space-y-4 md:space-y-6">
           <div className="flex items-center gap-4">
-             <div className="h-px w-10 md:w-12 bg-[#FBCFE8]" />
+             <div className="h-px w-10 md:w-12 bg-[#C9A84C]" />
              <p className="text-[9px] md:text-[10px] font-bold text-[#C9A84C] uppercase tracking-[0.4em]">Curated Discovery</p>
           </div>
           <h1 className="text-3xl md:text-5xl lg:text-6xl text-slate-900" style={{ fontFamily: "'Playfair Display', serif" }}>

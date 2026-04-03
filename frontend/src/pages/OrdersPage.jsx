@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const StatusBadge = ({ status }) => {
   const styles = {
     PLACED: "bg-slate-50 text-slate-500 border-slate-100",
-    PAID: "bg-[#FBCFE8]/10 text-[#FBCFE8] border-[#FBCFE8]/20",
+    PAID: "bg-[#C9A84C]/10 text-slate-900 border-[#C9A84C]/20 font-bold",
     SHIPPED: "bg-[#C9A84C]/10 text-[#C9A84C] border-[#C9A84C]/20",
     DELIVERED: "bg-green-50 text-green-600 border-green-100",
     CANCELLED: "bg-red-50 text-red-500 border-red-100",
@@ -96,7 +96,7 @@ export default function OrdersPage() {
               {/* Header: Pure Luxury Look */}
               <div className="p-6 md:p-8 border-b border-gray-50 flex flex-wrap items-center justify-between gap-6">
                 <div className="flex items-center gap-6">
-                  <div className="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center text-slate-900 group-hover:bg-[#FBCFE8]/10 transition-colors duration-500">
+                  <div className="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center text-slate-900 group-hover:bg-[#C9A84C]/5 transition-colors duration-500">
                     <Package size={22} strokeWidth={1.5} />
                   </div>
                   <div>

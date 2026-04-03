@@ -138,7 +138,7 @@ function ProductCard({ product, p }) {
         <div className="pt-3 block lg:hidden">
           <button
             onClick={handleAddToCart}
-            className="w-full bg-slate-900 text-white py-2.5 rounded-xl text-[9px] font-bold uppercase tracking-[0.15em] flex items-center justify-center gap-2 active:bg-[#FBCFE8] transition-colors shadow-lg"
+            className="w-full bg-slate-900 text-white py-2.5 rounded-xl text-[9px] font-bold uppercase tracking-[0.15em] flex items-center justify-center gap-2 active:bg-black transition-colors shadow-lg"
           >
             <FaShoppingCart size={10} />
             Add to Selection

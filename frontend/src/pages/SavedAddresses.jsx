@@ -106,7 +106,7 @@ export default function SavedAddresses() {
                   key={addr._id}
                   className={`relative group bg-white rounded-[2rem] md:rounded-[2.5rem] border transition-all duration-700 overflow-hidden ${
                     addr.isDefault 
-                      ? "border-[#FBCFE8]/30 shadow-[0_30px_70px_rgba(251,207,232,0.1)]" 
+                      ? "border-[#C9A84C]/30 shadow-[0_30px_70px_rgba(201,168,76,0.1)]" 
                       : "border-gray-50 shadow-[0_10px_40px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.05)]"
                   }`}
                 >
@@ -151,7 +151,7 @@ export default function SavedAddresses() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                       <div className="space-y-4">
                         <div className="flex gap-4">
-                          <MapPin className="text-[#FBCFE8]/50 flex-shrink-0 mt-1" size={18} />
+                          <MapPin className="text-[#C9A84C]/50 flex-shrink-0 mt-1" size={18} />
                           <p className="text-sm font-medium text-slate-500 leading-loose" style={{ fontFamily: "'Jost', sans-serif" }}>
                             {addr.street}<br />
                             {addr.city}, {addr.state} — <span className="text-slate-900 font-bold tracking-widest">{addr.pincode}</span>
@@ -186,20 +186,20 @@ export default function SavedAddresses() {
 
         <div className="mt-12 md:mt-20 p-8 md:p-12 bg-slate-900 rounded-[2rem] md:rounded-[3rem] shadow-[0_40px_80px_rgba(0,0,0,0.15)] relative overflow-hidden group">
            {/* Decorative flare */}
-           <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#FBCFE8]/10 to-transparent rounded-full -mr-48 -mt-48 blur-3xl opacity-50 group-hover:opacity-70 transition-opacity duration-700"></div>
+           <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#C9A84C]/10 to-transparent rounded-full -mr-48 -mt-48 blur-3xl opacity-50 group-hover:opacity-70 transition-opacity duration-700"></div>
            
            <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
              <div className="flex items-center gap-8">
                 <div className="w-20 h-20 bg-white/5 rounded-[2rem] flex items-center justify-center text-[#C9A84C] border border-white/10 shadow-2xl overflow-hidden relative">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-[#FBCFE8]/5 to-transparent animate-shimmer" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-[#C9A84C]/5 to-transparent animate-shimmer" />
                   <Star size={32} fill="currentColor" />
                 </div>
                 <div>
                   <h4 className="text-2xl font-normal text-white mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>Signature Fulfillment Status</h4>
-                  <p className="text-[10px] text-[#FBCFE8] font-bold uppercase tracking-[0.3em]">Complementary White-Glove Delivery Enabled</p>
+                  <p className="text-[10px] text-[#C9A84C] font-bold uppercase tracking-[0.3em]">Complementary White-Glove Delivery Enabled</p>
                 </div>
              </div>
-             <button className="bg-white text-slate-900 px-12 py-5 rounded-2xl text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl hover:bg-[#FBCFE8] transition-all duration-500 whitespace-nowrap">
+             <button className="bg-white text-slate-900 px-12 py-5 rounded-2xl text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl hover:bg-slate-50 transition-all duration-500 whitespace-nowrap">
                Explore Benefits
              </button>
            </div>

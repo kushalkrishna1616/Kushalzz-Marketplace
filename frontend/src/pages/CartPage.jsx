@@ -70,7 +70,7 @@ export default function Cart() {
                               ? changeQty(item._id, item.quantity - 1)
                               : removeFromCart(item._id)
                           }
-                          className="w-10 h-10 rounded-xl bg-white border border-gray-100 flex items-center justify-center text-slate-400 hover:bg-white hover:text-[#C9A84C] hover:border-[#FBCFE8] hover:shadow-sm transition-all"
+                          className="w-10 h-10 rounded-xl bg-white border border-gray-100 flex items-center justify-center text-slate-400 hover:bg-white hover:text-[#C9A84C] hover:border-[#C9A84C]/40 hover:shadow-sm transition-all"
                         >
                           —
                         </button>
@@ -81,7 +81,7 @@ export default function Cart() {
 
                         <button
                           onClick={() => changeQty(item._id, item.quantity + 1)}
-                          className="w-10 h-10 rounded-xl bg-white border border-gray-100 flex items-center justify-center text-slate-400 hover:bg-white hover:text-[#C9A84C] hover:border-[#FBCFE8] hover:shadow-sm transition-all"
+                          className="w-10 h-10 rounded-xl bg-white border border-gray-100 flex items-center justify-center text-slate-400 hover:bg-white hover:text-[#C9A84C] hover:border-[#C9A84C]/40 hover:shadow-sm transition-all"
                         >
                           +
                         </button>

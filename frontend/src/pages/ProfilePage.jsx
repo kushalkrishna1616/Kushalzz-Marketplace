@@ -53,7 +53,7 @@ const ProfilePage = () => {
           </div>
 
           <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
-            <div className="w-40 h-40 rounded-full border-4 border-[#FBCFE8]/20 p-1 relative overflow-hidden">
+            <div className="w-40 h-40 rounded-full border-4 border-[#C9A84C]/20 p-1 relative overflow-hidden">
                <div className="w-full h-full rounded-full bg-slate-100 flex items-center justify-center text-slate-300 text-6xl font-light border border-[#C9A84C]/20 shadow-inner overflow-hidden">
                   {user.name ? (
                     <span className="text-slate-800" style={{ fontFamily: "'Playfair Display', serif" }}>{user.name.charAt(0).toUpperCase()}</span>
@@ -71,7 +71,7 @@ const ProfilePage = () => {
               </div>
               
               <div className="flex flex-wrap justify-center md:justify-start gap-3">
-                <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#FBCFE8]/10 text-[#FBCFE8] text-[9px] font-bold uppercase tracking-widest border border-[#FBCFE8]/20">
+                <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#C9A84C]/10 text-slate-900 text-[9px] font-bold uppercase tracking-widest border border-[#C9A84C]/20 shadow-md shadow-[#C9A84C]/5">
                   <FaUserTag size={10} /> {user.role}
                 </span>
                 {user.isVerified && (
@@ -173,9 +173,9 @@ const ProfilePage = () => {
           transition={{ delay: 0.3 }}
           className="mt-12 bg-white rounded-[2rem] border border-gray-100 p-8 flex flex-wrap justify-center gap-6 shadow-sm"
         >
-          <button className="px-10 py-4 rounded-2xl bg-white border border-gray-100 text-[10px] font-bold text-slate-400 uppercase tracking-widest hover:text-[#C9A84C] hover:border-[#FBCFE8] hover:shadow-xl hover:shadow-gray-100 transition-all duration-500">Update Profile</button>
-          <button className="px-10 py-4 rounded-2xl bg-white border border-gray-100 text-[10px] font-bold text-slate-400 uppercase tracking-widest hover:text-[#C9A84C] hover:border-[#FBCFE8] hover:shadow-xl hover:shadow-gray-100 transition-all duration-500">Security Vault</button>
-          <button className="px-10 py-4 rounded-2xl bg-white border border-gray-100 text-[10px] font-bold text-slate-400 uppercase tracking-widest hover:text-[#C9A84C] hover:border-[#FBCFE8] hover:shadow-xl hover:shadow-gray-100 transition-all duration-500">Manage Destinations</button>
+          <button className="px-10 py-4 rounded-2xl bg-white border border-gray-100 text-[10px] font-bold text-slate-400 uppercase tracking-widest hover:text-[#C9A84C] hover:border-[#C9A84C]/50 hover:shadow-xl hover:shadow-gray-100 transition-all duration-500">Update Profile</button>
+          <button className="px-10 py-4 rounded-2xl bg-white border border-gray-100 text-[10px] font-bold text-slate-400 uppercase tracking-widest hover:text-[#C9A84C] hover:border-[#C9A84C]/50 hover:shadow-xl hover:shadow-gray-100 transition-all duration-500">Security Vault</button>
+          <button className="px-10 py-4 rounded-2xl bg-white border border-gray-100 text-[10px] font-bold text-slate-400 uppercase tracking-widest hover:text-[#C9A84C] hover:border-[#C9A84C]/50 hover:shadow-xl hover:shadow-gray-100 transition-all duration-500">Manage Destinations</button>
         </motion.div>
       </div>
     </div>

@@ -84,8 +84,8 @@ const Navbar = () => {
                 <span className="w-1.5 h-1.5 rounded-full bg-white/30"></span>
                 Complimentary Concierge Delivery on Orders Above ₹4,999
               </span>
-              <span className="text-[9px] font-bold text-[#FBCFE8] uppercase tracking-[0.3em] flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#FBCFE8]/50"></span>
+              <span className="text-[9px] font-bold text-[#C9A84C] uppercase tracking-[0.3em] flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#C9A84C]/50 animate-pulse"></span>
                 Exclusive Member-Only Access to Designer Drop #04
               </span>
             </div>

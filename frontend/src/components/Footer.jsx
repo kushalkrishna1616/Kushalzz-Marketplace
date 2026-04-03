@@ -16,7 +16,7 @@ export default function Footer() {
               <h2 className="text-3xl text-white tracking-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
                 Kushalzz <span className="text-[#C9A84C] italic">Marketplace</span>
               </h2>
-              <p className="text-[10px] font-bold text-[#FBCFE8] tracking-[0.4em] uppercase">Shop Smarter. Live Calmer.</p>
+              <p className="text-[10px] font-bold text-[#C9A84C]/80 tracking-[0.4em] uppercase">Shop Smarter. Live Calmer.</p>
             </div>
             <p className="text-sm font-light leading-relaxed text-gray-400 max-w-sm italic" style={{ fontFamily: "'Jost', sans-serif" }}>
               Experience the pinnacle of fashion and lifestyle. We curate the most exclusive collections for those who appreciate the finer things in life.

@@ -47,8 +47,8 @@ export default function Register() {
     <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA] p-6 md:p-12 relative overflow-hidden">
       {/* Aesthetic Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
-         <div className="absolute top-[-15%] right-[-10%] w-[60%] h-[60%] bg-[#FBCFE8] rounded-full blur-[140px]" />
-         <div className="absolute bottom-[-15%] left-[-10%] w-[60%] h-[60%] bg-[#C9A84C] rounded-full blur-[140px]" />
+         <div className="absolute top-[-15%] right-[-10%] w-[60%] h-[60%] bg-[#C9A84C]/5 rounded-full blur-[140px]" />
+         <div className="absolute bottom-[-15%] left-[-10%] w-[60%] h-[60%] bg-slate-200/20 rounded-full blur-[140px]" />
       </div>
 
       <motion.div 
@@ -68,13 +68,13 @@ export default function Register() {
         </div>
 
         {success && (
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-[#FBCFE8]/20 text-[#EC4899] p-4 rounded-2xl mb-8 text-center text-[10px] font-bold tracking-widest border border-[#FBCFE8]/30"
-          >
-            Sovereignty Secured: Account Curated.
-          </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-[#C9A84C]/10 text-slate-900 px-6 py-4 rounded-2xl mb-10 text-center text-[10px] font-bold tracking-widest border border-[#C9A84C]/20 shadow-xl shadow-[#C9A84C]/5"
+            >
+              Sovereignty Secured: Profile Curated.
+            </motion.div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4 md:space-y-5">
@@ -128,9 +128,9 @@ export default function Register() {
         <div className="mt-8 md:mt-10 text-center">
           <Link 
             to="/login"
-            className="text-[9px] md:text-[10px] font-bold text-[#FBCFE8] uppercase tracking-[0.3em] hover:text-slate-900 transition-colors"
+            className="text-[10px] font-bold text-[#C9A84C] uppercase tracking-[0.3em] hover:text-slate-900 transition-all border-b border-transparent hover:border-[#C9A84C] pb-1"
           >
-            Known Member? Authenticate
+            Known Member? Authenticate Here
           </Link>
         </div>
       </motion.div>

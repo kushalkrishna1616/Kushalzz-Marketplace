@@ -114,7 +114,7 @@ export default function Checkout() {
           <div className="lg:col-span-2 space-y-12">
             <section className="bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-sm border border-gray-100">
               <div className="flex items-center gap-4 mb-6 md:mb-8">
-                <span className="w-8 h-8 rounded-full bg-[#FBCFE8] flex items-center justify-center text-[10px] font-bold text-white uppercase">01</span>
+                <span className="w-8 h-8 rounded-full bg-[#C9A84C] flex items-center justify-center text-[10px] font-bold text-white uppercase">01</span>
                 <h2 className="text-xl md:text-2xl font-normal text-slate-900" style={{ fontFamily: "'Playfair Display', serif" }}>Delivery Destination</h2>
               </div>
 
@@ -131,7 +131,7 @@ export default function Checkout() {
                       className={`p-6 border-2 rounded-2xl cursor-pointer transition-all duration-500 relative ${
                         selectedAddress?._id === addr._id
                           ? "border-[#C9A84C] bg-[#C9A84C]/5"
-                          : "border-gray-100 hover:border-[#FBCFE8] bg-gray-50/30"
+                          : "border-gray-100 hover:border-[#C9A84C]/40 bg-gray-50/30"
                       }`}
                     >
                       <div className="flex items-center justify-between mb-2">
@@ -152,7 +152,7 @@ export default function Checkout() {
                   ))}
                   <button
                     onClick={() => navigate("/add-address")}
-                    className="p-6 border-2 border-dashed border-gray-200 rounded-2xl flex flex-col items-center justify-center gap-2 text-gray-400 hover:text-[#FBCFE8] hover:border-[#FBCFE8] transition-all"
+                    className="p-6 border-2 border-dashed border-gray-200 rounded-2xl flex flex-col items-center justify-center gap-2 text-gray-400 hover:text-[#C9A84C] hover:border-[#C9A84C] transition-all"
                   >
                     <span className="text-xl">+</span>
                     <span className="text-[10px] uppercase font-bold tracking-widest">Add New Address</span>
