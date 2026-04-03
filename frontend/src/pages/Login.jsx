@@ -107,10 +107,16 @@ export default function Login() {
       return;
     }
 
-    if (!validateEmail(form.contact)) {
-      loginToast("Please enter a valid email structure");
+    // Robust manual check plus regex
+    const emailStr = form.contact.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if (!emailStr.includes("@") || !emailStr.includes(".") || !emailRegex.test(emailStr)) {
+      loginToast("A valid email (e.g. name@gmail.com) is mandatory");
+      console.error("Invalid Email Attempt:", emailStr);
       return;
     }
+
     setStep(2); // Role selection
   };
 
