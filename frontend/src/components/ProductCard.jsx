@@ -1,11 +1,12 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CartContext from "../context/CartContext.jsx";
 import { useWishlist } from "../context/WishlistContext.jsx";
 import toast from "react-hot-toast";
 import { FaHeart, FaShoppingCart, FaStar } from "react-icons/fa";
 
 function ProductCard({ product, p }) {
+  const navigate = useNavigate();
   const rawItem = product || p || {};
   const { addItem } = useContext(CartContext);
   const { toggleWishlist, isInWishlist } = useWishlist();
@@ -25,6 +26,27 @@ function ProductCard({ product, p }) {
   const handleAddToCart = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    
+    const token = localStorage.getItem("token");
+    const username = localStorage.getItem("username");
+
+    console.log("Local Checkout Auth Check - Token:", !!token, "Username:", !!username);
+
+    if (!token || !username || token === "undefined" || token === "null") {
+      toast.error("Please sign in to curate your selection", {
+        duration: 4000,
+        icon: '🔒',
+        style: {
+          borderRadius: '12px',
+          background: '#111',
+          color: '#fff',
+          fontWeight: 'bold'
+        },
+      });
+      navigate("/login");
+      return;
+    }
+
     addItem(item);
     toast.success("Exclusive addition to your selection");
   };
@@ -32,6 +54,20 @@ function ProductCard({ product, p }) {
   const handleToggleWishlist = (e) => {
     e.preventDefault();
     e.stopPropagation();
+
+    const token = localStorage.getItem("token");
+    const username = localStorage.getItem("username");
+
+    console.log("Local Wishlist Auth Check - Token:", !!token, "Username:", !!username);
+
+    if (!token || !username || token === "undefined" || token === "null") {
+      toast.error("Sign in to save to your wishlist", {
+        icon: '✨',
+      });
+      navigate("/login");
+      return;
+    }
+
     toggleWishlist(item._id);
   };
 
@@ -54,14 +90,14 @@ function ProductCard({ product, p }) {
         <button
           onClick={handleToggleWishlist}
           className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all duration-500 z-10 ${
-            isFavorite ? "bg-[#EC4899] scale-110 shadow-[#EC4899]/40" : "bg-[#FBCFE8] scale-100 hover:scale-110"
+            isFavorite ? "bg-[#C9A84C] scale-110 shadow-[#C9A84C]/40" : "bg-white/80 backdrop-blur-md scale-100 hover:scale-110"
           }`}
         >
           <FaHeart 
             size={16} 
             className="transition-all duration-500"
-            fill={isFavorite ? "#C9A84C" : "white"} 
-            stroke={isFavorite ? "#C9A84C" : "white"}
+            fill={isFavorite ? "white" : "#94a3b8"} 
+            stroke={isFavorite ? "white" : "#94a3b8"}
             strokeWidth={isFavorite ? 0 : 2} 
           />
         </button>
@@ -70,7 +106,7 @@ function ProductCard({ product, p }) {
         <div className="absolute inset-x-4 bottom-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 hidden lg:block">
           <button
             onClick={handleAddToCart}
-            className="w-full bg-white text-black py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl hover:bg-black hover:text-white transition-colors flex items-center justify-center gap-2"
+            className="w-full bg-slate-900 text-white py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl hover:bg-black hover:text-[#C9A84C] transition-colors flex items-center justify-center gap-2"
           >
             <FaShoppingCart size={11} />
             Add to Selection
@@ -80,7 +116,7 @@ function ProductCard({ product, p }) {
 
       <div className="mt-5 space-y-1.5 px-1 pb-4">
         <div className="flex items-center justify-between">
-          <p className="text-[10px] font-bold text-[#FBCFE8] uppercase tracking-[0.2em]">
+          <p className="text-[10px] font-bold text-[#C9A84C] uppercase tracking-[0.2em]">
             {item.brand || "Elite Collection"}
           </p>
           <div className="flex text-[#C9A84C] gap-0.5">
@@ -89,7 +125,7 @@ function ProductCard({ product, p }) {
           </div>
         </div>
         
-        <h3 className="text-sm lg:text-base text-slate-900 group-hover:text-[#FBCFE8] transition-colors leading-snug line-clamp-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+        <h3 className="text-sm lg:text-base text-slate-900 group-hover:text-[#C9A84C] transition-colors leading-snug line-clamp-2" style={{ fontFamily: "'Playfair Display', serif" }}>
           {item.name}
         </h3>
         

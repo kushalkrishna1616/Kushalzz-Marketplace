@@ -35,8 +35,8 @@ body {
 
 .boutique-input:focus {
   outline: none;
-  border-color: #FBCFE8;
-  box-shadow: 0 10px 30px rgba(251, 207, 232, 0.15);
+  border-color: #C9A84C;
+  box-shadow: 0 10px 30px rgba(201, 168, 76, 0.15);
   transform: translateY(-1px);
 }
 

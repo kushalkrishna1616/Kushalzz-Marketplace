@@ -67,7 +67,7 @@ export default function AdminLayout() {
         <div className="flex flex-col h-full w-[280px]">
           {/* Logo */}
           <div className="flex items-center justify-between p-6 border-b border-gray-100">
-            <Link to="/admin" className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-orange-500 bg-clip-text text-transparent">
+            <Link to="/admin" className="text-2xl font-bold bg-gradient-to-r from-slate-900 to-[#C9A84C] bg-clip-text text-transparent">
               Kushalzz Marketplace Admin
             </Link>
             <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden text-gray-400 hover:text-gray-600">
@@ -85,7 +85,7 @@ export default function AdminLayout() {
                   to={link.path}
                   className={`flex items-center justify-between px-4 py-3 rounded-xl transition-all group ${
                     isActive 
-                      ? "bg-pink-50 text-pink-600 font-semibold" 
+                      ? "bg-slate-900 text-white font-semibold shadow-lg shadow-slate-200" 
                       : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
                   }`}
                 >
@@ -133,7 +133,7 @@ export default function AdminLayout() {
               <p className="text-sm font-semibold text-gray-800">Administrator</p>
               <p className="text-xs text-gray-500 italic">Global Access</p>
             </div>
-            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-500 to-orange-400 flex items-center justify-center text-white font-bold shadow-lg shadow-pink-200">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-slate-800 to-slate-900 flex items-center justify-center text-[#C9A84C] font-bold shadow-lg shadow-slate-200">
               AD
             </div>
           </div>

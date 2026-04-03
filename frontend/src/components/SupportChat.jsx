@@ -102,10 +102,10 @@ const SupportChat = () => {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500 transform hover:scale-110 ${
-          isOpen ? "bg-slate-900 rotate-90" : "bg-[#EC4899]"
+          isOpen ? "bg-slate-900 rotate-90" : "bg-slate-900"
         }`}
       >
-        {isOpen ? <FaTimes className="text-white text-xl" /> : <FaHeadset className="text-white text-xl" />}
+        {isOpen ? <FaTimes className="text-white text-xl" /> : <FaHeadset className={`text-xl ${isOpen ? 'text-white' : 'text-[#C9A84C]'}`} />}
         {!isOpen && (
           <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#C9A84C] border-2 border-white rounded-full animate-pulse" />
         )}
@@ -121,7 +121,7 @@ const SupportChat = () => {
         <div className="bg-slate-900 p-6 text-white">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-[#EC4899]/20 border border-[#EC4899]/30 flex items-center justify-center text-[#EC4899]">
+              <div className="w-10 h-10 rounded-full bg-[#C9A84C]/20 border border-[#C9A84C]/30 flex items-center justify-center text-[#C9A84C]">
                 {mode === "ai" ? <div className="animate-pulse">✨</div> : <FaHeadset size={18} />}
               </div>
               <div>
@@ -139,13 +139,13 @@ const SupportChat = () => {
           <div className="flex bg-slate-800 rounded-full p-1 gap-1">
             <button 
               onClick={() => setMode("ai")}
-              className={`flex-1 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all ${mode === "ai" ? "bg-[#EC4899] text-white" : "text-gray-500 hover:text-gray-300"}`}
+              className={`flex-1 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all ${mode === "ai" ? "bg-[#C9A84C] text-slate-900" : "text-gray-500 hover:text-gray-300"}`}
             >
               Consultant Mode
             </button>
             <button 
               onClick={() => setMode("human")}
-              className={`flex-1 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all ${mode === "human" ? "bg-[#EC4899] text-white" : "text-gray-500 hover:text-gray-300"}`}
+              className={`flex-1 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all ${mode === "human" ? "bg-[#C9A84C] text-slate-900" : "text-gray-500 hover:text-gray-300"}`}
             >
               Concierge Mode
             </button>
@@ -176,7 +176,7 @@ const SupportChat = () => {
                   className={`max-w-[80%] p-3.5 rounded-2xl text-[13px] leading-relaxed shadow-sm ${
                     msg.isAdmin
                       ? "bg-white text-slate-700 rounded-tl-none border border-gray-100"
-                      : "bg-[#EC4899] text-white rounded-tr-none"
+                      : "bg-slate-900 text-white rounded-tr-none border border-slate-800"
                   }`}
                 >
                   {msg.message}
@@ -198,7 +198,7 @@ const SupportChat = () => {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Type your message..."
-              className="w-full bg-gray-50 border border-gray-100 rounded-2xl py-3.5 px-5 pr-12 text-sm focus:outline-none focus:ring-2 focus:ring-[#EC4899]/20 transition-all font-medium"
+              className="w-full bg-gray-50 border border-gray-100 rounded-2xl py-3.5 px-5 pr-12 text-sm focus:outline-none focus:ring-2 focus:ring-[#C9A84C]/20 transition-all font-medium"
             />
             <button
               type="submit"

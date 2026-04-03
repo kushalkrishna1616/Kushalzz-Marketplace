@@ -67,14 +67,14 @@ export default function AdminDashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-full">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#C9A84C]"></div>
       </div>
     );
   }
 
   const stats = [
     { title: "Total Revenue", value: `₹${metrics?.totalRevenue?.toLocaleString() || 0}`, icon: CreditCard, trend: 12.5, color: "bg-blue-500" },
-    { title: "Total Sales", value: metrics?.totalSales || 0, icon: ShoppingBag, trend: 8.2, color: "bg-pink-500" },
+    { title: "Total Sales", value: metrics?.totalSales || 0, icon: ShoppingBag, trend: 8.2, color: "bg-slate-900" },
     { title: "Active Customers", value: metrics?.totalCustomers || 0, icon: Users, trend: 15.3, color: "bg-orange-500" },
     { title: "Products", value: metrics?.totalProducts || 0, icon: Package, trend: -2.4, color: "bg-purple-500" },
   ];
@@ -109,7 +109,7 @@ export default function AdminDashboard() {
               <h3 className="text-xl font-bold">Sales Trends</h3>
               <p className="text-gray-500 text-sm">Revenue performance over the last 7 days</p>
             </div>
-            <div className="p-2 bg-pink-50 text-pink-600 rounded-lg">
+            <div className="p-2 bg-slate-100 text-slate-800 rounded-lg">
               <TrendingUp size={20} />
             </div>
           </div>
@@ -118,8 +118,8 @@ export default function AdminDashboard() {
               <AreaChart data={metrics?.salesTrends || []}>
                 <defs>
                   <linearGradient id="colorSales" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#ec4899" stopOpacity={0.1}/>
-                    <stop offset="95%" stopColor="#ec4899" stopOpacity={0}/>
+                    <stop offset="5%" stopColor="#C9A84C" stopOpacity={0.1}/>
+                    <stop offset="95%" stopColor="#C9A84C" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
@@ -146,7 +146,7 @@ export default function AdminDashboard() {
                 <Area 
                   type="monotone" 
                   dataKey="sales" 
-                  stroke="#ec4899" 
+                  stroke="#C9A84C" 
                   strokeWidth={3} 
                   fillOpacity={1} 
                   fill="url(#colorSales)" 
@@ -167,11 +167,11 @@ export default function AdminDashboard() {
           <div className="h-[300px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={[
-                { name: "Makeup", value: 45 },
-                { name: "Skin", value: 32 },
-                { name: "Hair", value: 28 },
-                { name: "Fragrance", value: 20 },
-                { name: "Body", value: 15 },
+                { name: "Men's Wear", value: 45 },
+                { name: "Women's Wear", value: 32 },
+                { name: "Kids", value: 28 },
+                { name: "Footwear", value: 20 },
+                { name: "Accessories", value: 15 },
               ]}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
                 <XAxis 

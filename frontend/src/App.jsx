@@ -13,9 +13,6 @@ import Checkout from "./pages/Checkout";
 import OrderSuccess from "./pages/OrderSuccess";
 import AddAddress from "./pages/AddAddress";
 import SearchResults from "./pages/SearchResults";
-import SkinAnalyzer from "./pages/SkinAnalyzer";
-import RoutineBuilder from "./pages/RoutineBuilder";
-import IngredientChecker from "./pages/IngredientChecker";
 import PrivacyPage from "./pages/PrivacyPage";
 import TermsPage from "./pages/TermsPage";
 import SecurityPage from "./pages/SecurityPage";
@@ -113,9 +110,6 @@ export default function App() {
               <Route path="/order-success" element={<OrderSuccess />} />
               <Route path="/add-address" element={<AddAddress />} />
                <Route path="/search" element={<SearchResults />} />
-               <Route path="/skin-analyzer" element={<SkinAnalyzer />} />
-               <Route path="/routine-builder" element={<RoutineBuilder />} />
-               <Route path="/ingredient-checker" element={<IngredientChecker />} />
                <Route path="/privacy" element={<PrivacyPage />} />
                <Route path="/terms" element={<TermsPage />} />
                <Route path="/security" element={<SecurityPage />} />

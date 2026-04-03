@@ -100,64 +100,68 @@ export default function ProductEditor() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                placeholder="e.g. Matte Lipstick - Ruby Red"
-                className="w-full px-4 py-3 bg-gray-50 border-none rounded-xl focus:ring-2 focus:ring-pink-500 transition-all outline-none"
+                placeholder="e.g. Slim Fit Denim Jacket"
+                className="w-full px-4 py-3 bg-gray-50 border-none rounded-xl focus:ring-2 focus:ring-slate-900 transition-all outline-none"
               />
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
-                <Box size={16} className="text-pink-500" />
-                Description
-              </label>
-              <textarea 
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                required
-                rows="6"
-                placeholder="Describe your product features and benefits..."
-                className="w-full px-4 py-3 bg-gray-50 border-none rounded-xl focus:ring-2 focus:ring-pink-500 transition-all outline-none resize-none"
-              ></textarea>
-            </div>
-
-            <div className="grid grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
-                  <span className="text-pink-500 font-bold">₹</span>
-                  Price
-                </label>
-                <input 
-                  type="number"
-                  name="price"
-                  value={formData.price}
-                  onChange={handleChange}
-                  required
-                  placeholder="299"
-                  className="w-full px-4 py-3 bg-gray-50 border-none rounded-xl focus:ring-2 focus:ring-pink-500 transition-all outline-none"
-                />
               </div>
+
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
-                  <Tag size={16} className="text-pink-500" />
-                  Category
+                  <Box size={16} className="text-slate-900" />
+                  Description
                 </label>
-                <select 
-                  name="category"
-                  value={formData.category}
+                <textarea 
+                  name="description"
+                  value={formData.description}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-50 border-none rounded-xl focus:ring-2 focus:ring-pink-500 transition-all outline-none"
-                >
-                  <option value="">Select Category</option>
-                  <option value="makeup">Makeup</option>
-                  <option value="skin">Skin</option>
-                  <option value="hair">Hair</option>
-                  <option value="fragrance">Fragrance</option>
-                  <option value="men">Men</option>
-                  <option value="bath-body">Bath & Body</option>
-                  <option value="wellness">Wellness</option>
-                </select>
+                  rows="6"
+                  placeholder="Describe your product materials, fit and style guides..."
+                  className="w-full px-4 py-3 bg-gray-50 border-none rounded-xl focus:ring-2 focus:ring-slate-900 transition-all outline-none resize-none"
+                ></textarea>
+              </div>
+
+              <div className="grid grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                    <span className="text-slate-900 font-bold">₹</span>
+                    Price
+                  </label>
+                  <input 
+                    type="number"
+                    name="price"
+                    value={formData.price}
+                    onChange={handleChange}
+                    required
+                    placeholder="2499"
+                    className="w-full px-4 py-3 bg-gray-50 border-none rounded-xl focus:ring-2 focus:ring-slate-900 transition-all outline-none"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                    <Tag size={16} className="text-slate-900" />
+                    Category
+                  </label>
+                  <select 
+                    name="category"
+                    value={formData.category}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-gray-50 border-none rounded-xl focus:ring-2 focus:ring-slate-900 transition-all outline-none"
+                  >
+                    <option value="">Select Category</option>
+                    <option value="menswear">Men's Wear</option>
+                    <option value="womenswear">Women's Wear</option>
+                    <option value="kids">Kids</option>
+                    <option value="activewear">Activewear</option>
+                    <option value="footwear">Footwear</option>
+                    <option value="accessories">Accessories</option>
+                    <option value="winter-wear">Winter Wear</option>
+                    <option value="formal-attire">Formal Attire</option>
+                    <option value="streetwear">Street Style</option>
+                    <option value="designer">Designer</option>
+                    <option value="vintage">Vintage</option>
+                  </select>
               </div>
             </div>
 

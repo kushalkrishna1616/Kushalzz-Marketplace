@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { API } from "../pages/api.jsx";
 import CartContext from "../context/CartContext.jsx";
@@ -7,6 +7,7 @@ import { FaShoppingCart, FaHeart, FaChevronRight, FaStar, FaShieldAlt, FaTruck, 
 import toast from "react-hot-toast";
 
 export default function ProductDetails() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -33,12 +34,33 @@ export default function ProductDetails() {
 
   const handleAddToCart = () => {
     if (!product) return;
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("Sign in to curate your selection", {
+        icon: '🔒',
+        style: { borderRadius: '12px', background: '#111', color: '#fff' }
+      });
+      navigate("/login");
+      return;
+    }
+
     addItem({ ...product, quantity });
     toast.success(`${product.name} added to cart!`);
   };
 
   const handleToggleWishlist = () => {
     if (!product) return;
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("Please sign in to save your wishlist", {
+        icon: '✨'
+      });
+      navigate("/login");
+      return;
+    }
+
     toggleWishlist(product._id);
   };
 
@@ -66,9 +88,9 @@ export default function ProductDetails() {
       {/* Breadcrumbs */}
       <div className="bg-gray-50 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center gap-3 text-[11px] uppercase tracking-[0.2em] text-gray-400">
-          <Link to="/" className="hover:text-[#FBCFE8] transition-colors">Home</Link>
+          <Link to="/" className="hover:text-[#C9A84C] transition-colors">Home</Link>
           <FaChevronRight size={8} className="opacity-50" />
-          <Link to={`/category/${product.category}`} className="hover:text-[#FBCFE8] transition-colors">{product.category}</Link>
+          <Link to={`/category/${product.category}`} className="hover:text-[#C9A84C] transition-colors">{product.category}</Link>
           <FaChevronRight size={8} className="opacity-50" />
           <span className="text-gray-900 truncate max-w-[200px]">{product.name}</span>
         </div>
@@ -88,14 +110,14 @@ export default function ProductDetails() {
               <button 
                 onClick={handleToggleWishlist}
                 className={`absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 md:w-14 md:h-14 rounded-full flex items-center justify-center transition-all duration-500 shadow-2xl z-20 ${
-                  isFavorite ? "bg-[#EC4899] scale-110 shadow-[#EC4899]/40" : "bg-[#FBCFE8] scale-100 hover:scale-110"
+                  isFavorite ? "bg-[#C9A84C] scale-110 shadow-[#C9A84C]/40" : "bg-white/80 backdrop-blur-md scale-100 hover:scale-110"
                 }`}
               >
                 <FaHeart 
                   size={isFavorite ? 18 : 16} 
                   className="transition-all duration-500 md:w-6 md:h-6"
-                  fill={isFavorite ? "#C9A84C" : "white"} 
-                  stroke={isFavorite ? "#C9A84C" : "white"}
+                  fill={isFavorite ? "white" : "#94a3b8"} 
+                  stroke={isFavorite ? "white" : "#94a3b8"}
                   strokeWidth={isFavorite ? 0 : 2.5} 
                 />
               </button>
@@ -116,7 +138,7 @@ export default function ProductDetails() {
                 {product.name}
               </h1>
               
-              <p className="text-[11px] font-bold text-[#FBCFE8] uppercase tracking-[0.4em]">
+              <p className="text-[11px] font-bold text-[#C9A84C] uppercase tracking-[0.4em]">
                 {product.brand || "Kushalzz Marketplace Elite Selection"}
               </p>
 
@@ -129,7 +151,7 @@ export default function ProductDetails() {
               <div className="h-[1px] w-full bg-gray-100 my-6 md:my-10" />
 
               <p className="text-slate-600 leading-relaxed text-sm font-light tracking-wide lg:max-w-md" style={{ fontFamily: "'Jost', sans-serif" }}>
-                {product.description || "Indulge in the purest luxury. This meticulously crafted formulation blends ancient wisdom with modern science to deliver unparalleled results."}
+                {product.description || "Experience unparalleled style with this masterfully crafted piece. Designed for a perfect fit and ultimate comfort, using only the finest materials for a truly premium aesthetic."}
               </p>
 
               <div className="space-y-8 mt-12">
@@ -147,9 +169,9 @@ export default function ProductDetails() {
                   
                   <button 
                     onClick={handleAddToCart}
-                    className="flex-1 bg-slate-900 text-white rounded-full py-4 md:py-5 px-8 md:px-10 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] transition-all duration-500 hover:bg-[#0D0D0D] hover:shadow-2xl hover:shadow-[#FBCFE8]/20 flex items-center justify-center gap-3 md:gap-4 group"
+                    className="flex-1 bg-slate-900 text-white rounded-full py-4 md:py-5 px-8 md:px-10 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] transition-all duration-500 hover:bg-black hover:shadow-2xl hover:shadow-[#C9A84C]/10 flex items-center justify-center gap-3 md:gap-4 group"
                   >
-                    <FaShoppingCart className="text-xs md:text-sm group-hover:scale-110 transition-transform" />
+                    <FaShoppingCart className="text-xs md:text-sm group-hover:scale-110 transition-transform group-hover:text-[#C9A84C]" />
                     Add to Collection
                   </button>
                 </div>

@@ -148,7 +148,7 @@ const Navbar = () => {
                     >
                       <img src={product.image} className="w-12 h-12 object-cover rounded-lg border border-gray-100" alt="" />
                       <div>
-                        <p className="text-sm font-medium text-slate-900 group-hover:text-[#EC4899] transition-colors line-clamp-1">{product.name}</p>
+                        <p className="text-sm font-medium text-slate-900 group-hover:text-[#C9A84C] transition-colors line-clamp-1">{product.name}</p>
                         <p className="text-xs text-slate-500">₹{product.price}</p>
                       </div>
                     </button>
@@ -174,15 +174,15 @@ const Navbar = () => {
                     <FaUser className="text-[#C9A84C] text-sm" />
                   </div>
                   <div className="hidden lg:flex flex-col items-start leading-none translate-y-[1px]">
-                    <span className="text-[9px] font-bold text-[#FBCFE8] uppercase tracking-[0.2em] mb-1">Authenticated</span>
+                    <span className="text-[9px] font-bold text-[#C9A84C] uppercase tracking-[0.2em] mb-1">Authenticated</span>
                     <span className="text-xs font-medium tracking-tight" style={{ fontFamily: "'Jost', sans-serif" }}>{username}</span>
                   </div>
                 </button>
                 <div className="absolute right-0 w-64 mt-4 transition-all opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-3 group-hover:translate-y-0 z-[100] scale-95 group-hover:scale-100 origin-top-right">
                   <div className="overflow-hidden bg-white border border-gray-200 rounded-3xl shadow-[0_30px_100px_-15px_rgba(0,0,0,0.15)] p-2 ring-1 ring-black/[0.03]">
                     {role === "admin" && (
-                      <Link to="/admin" className="flex items-center gap-3 px-4 py-3 text-[11px] text-[#EC4899] font-bold hover:bg-[#EC4899]/5 rounded-2xl transition-all border-b border-gray-100/50 mb-1 uppercase tracking-widest">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#EC4899] animate-pulse" />
+                      <Link to="/admin" className="flex items-center gap-3 px-4 py-3 text-[11px] text-[#C9A84C] font-bold hover:bg-[#C9A84C]/5 rounded-2xl transition-all border-b border-gray-100/50 mb-1 uppercase tracking-widest">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#C9A84C] animate-pulse" />
                         Admin Sanctuary
                       </Link>
                     )}
@@ -211,7 +211,7 @@ const Navbar = () => {
             )}
             
             <Link to="/wishlist" className="relative group lg:flex hidden items-center">
-              <div className="p-2.5 transition-all rounded-full bg-gray-50 text-[#EC4899] group-hover:scale-110 group-hover:bg-[#EC4899]/10 border border-gray-100">
+              <div className="p-2.5 transition-all rounded-full bg-gray-50 text-[#C9A84C] group-hover:scale-110 group-hover:bg-[#C9A84C]/10 border border-gray-100">
                 <FaHeart className="text-lg" />
               </div>
             </Link>
@@ -220,7 +220,7 @@ const Navbar = () => {
               <div className="p-2 sm:p-2.5 transition-all rounded-full bg-gray-50 text-[#C9A84C] group-hover:scale-110 group-hover:bg-[#C9A84C]/10 border border-gray-100">
                 <FaShoppingCart className="text-base sm:text-lg" />
                 {cartItems && cartItems.length > 0 && (
-                  <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[16px] sm:min-w-[20px] h-4 sm:h-5 px-1 text-[8px] sm:text-[9px] font-bold text-white bg-[#EC4899] rounded-full ring-2 ring-white shadow-lg">
+                  <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[16px] sm:min-w-[20px] h-4 sm:h-5 px-1 text-[8px] sm:text-[9px] font-bold text-white bg-slate-900 rounded-full ring-2 ring-white shadow-lg">
                     {cartItems.length}
                   </span>
                 )}
@@ -272,7 +272,7 @@ const Navbar = () => {
           <div className="absolute inset-y-0 right-0 w-[85%] bg-white shadow-2xl overflow-y-auto">
             <div className="flex flex-col h-full p-8 relative">
               <button 
-                className="absolute top-6 right-8 w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center text-slate-900 text-xl border border-gray-100 hover:bg-[#FBCFE8]/20 transition-colors" 
+                className="absolute top-6 right-8 w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center text-slate-900 text-xl border border-gray-100 hover:bg-[#C9A84C]/10 transition-colors" 
                 onClick={() => setIsMenuOpen(false)}
               > 
                 ✕ 
@@ -289,7 +289,7 @@ const Navbar = () => {
                     <Link
                       key={link.name}
                       to={link.path}
-                      className="group flex items-center justify-between p-4 rounded-2xl bg-gray-50 hover:bg-[#FBCFE8]/10 transition-all"
+                      className="group flex items-center justify-between p-4 rounded-2xl bg-gray-50 hover:bg-[#C9A84C]/5 transition-all"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       <span className="text-lg font-light tracking-wide text-slate-800 group-hover:text-[#C9A84C]" style={{ fontFamily: "'Jost', sans-serif" }}>
