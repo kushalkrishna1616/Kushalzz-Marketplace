@@ -184,8 +184,8 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA] p-6">
       <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none overflow-hidden">
-         <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#FBCFE8] rounded-full blur-[120px]" />
-         <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#C9A84C] rounded-full blur-[120px]" />
+         <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#C9A84C]/5 rounded-full blur-[120px]" />
+         <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-slate-200/20 rounded-full blur-[120px]" />
       </div>
 
       <div className="relative w-full max-w-5xl bg-white rounded-[3rem] shadow-[0_40px_100px_rgba(0,0,0,0.06)] overflow-hidden border border-white flex flex-col md:flex-row">
@@ -225,7 +225,7 @@ export default function Login() {
                   </div>
                 </div>
 
-                <p className="mt-8 text-[10px] font-bold text-[#C9A84C] uppercase tracking-widest text-center cursor-pointer hover:text-slate-900 transition-colors" onClick={() => switchMode("forgot")}>
+                <p className="mt-8 text-[11px] font-bold text-[#C9A84C]/70 uppercase tracking-[0.2em] text-center cursor-pointer hover:text-slate-900 transition-colors" onClick={() => switchMode("forgot")}>
                   Forgot Credentials?
                 </p>
               </>
@@ -283,16 +283,29 @@ export default function Login() {
               </>
             )}
 
-            <div className="pt-10 text-center">
-              <p className="text-[10px] font-bold text-[#FBCFE8] uppercase tracking-[0.3em] cursor-pointer hover:text-slate-900 transition-colors"
+            <div className="pt-12 flex flex-col items-center gap-8">
+              <div className="flex items-center gap-4 w-full px-4">
+                <div className="h-px bg-gray-100 flex-1" />
+                <p className="text-[8px] font-bold text-gray-300 uppercase tracking-[0.4em]">Membership Choice</p>
+                <div className="h-px bg-gray-100 flex-1" />
+              </div>
+              
+              <div 
+                className="text-center group cursor-pointer" 
                 onClick={() => {
                   setShowGoogleBtn(false);
                   switchMode(mode === "login" ? "signup" : "login");
-                }}>
-                {mode === "login"
-                  ? "New to Kushalzz? Create a Profile"
-                  : "Known Member? Authenticate Here"}
-              </p>
+                }}
+              >
+                <p className="text-[10px] font-medium text-gray-400 mb-2 uppercase tracking-widest transition-colors group-hover:text-slate-900">
+                  {mode === "login" ? "Don't have a boutique account?" : "Already part of our collection?"}
+                </p>
+                <div className="flex items-center justify-center gap-2">
+                  <span className="text-[13px] font-bold text-[#C9A84C] uppercase tracking-[0.25em] border-b border-transparent group-hover:border-[#C9A84C] transition-all pb-0.5">
+                    {mode === "login" ? "Register Your Profile" : "Sign In to Experience"}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -300,12 +313,12 @@ export default function Login() {
         {/* RIGHT PANEL: AESTHETIC SPLASH */}
         <div className="w-full md:w-[400px] bg-slate-900 relative flex items-center justify-center p-12 overflow-hidden">
            {/* Decorative background flare */}
-           <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-[#FBCFE8]/10 to-transparent opacity-50" />
+           <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-slate-800 to-transparent opacity-80" />
            
            <div className={`text-center space-y-8 relative z-10 transition-all duration-700 ${animating ? "opacity-0 scale-95" : "opacity-100 scale-100"}`}>
              <div className="flex justify-center">
                 <div className="w-24 h-24 rounded-[2.5rem] bg-white/5 border border-white/10 flex items-center justify-center text-[#C9A84C] shadow-2xl relative overflow-hidden group">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-[#FBCFE8]/5 to-transparent translate-y-full group-hover:translate-y-[-100%] transition-transform duration-1000" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-[#C9A84C]/5 to-transparent translate-y-full group-hover:translate-y-[-100%] transition-transform duration-1000" />
                   <FiUser size={40} strokeWidth={1} />
                 </div>
              </div>
